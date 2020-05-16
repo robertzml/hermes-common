@@ -9,7 +9,7 @@ import java.net.UnknownHostException;
 /**
  * 响应返回工具类
  */
-public class RestHelper {
+public class RestHelper<T> {
 
     /**
      * 构造响应返回
@@ -19,12 +19,18 @@ public class RestHelper {
      * @param message   消息
      * @return 返回对象
      */
-    public static ResponseData makeResponse(Object result, int errorCode, String message) {
-        ResponseData data = new ResponseData();
+    public static <T> ResponseData<T> makeResponse(T result, int errorCode, String message) {
+        ResponseData<T> data = new ResponseData<T>();
         data.result = result;
         data.errorCode = errorCode;
         data.message = message;
 
+        try {
+            var address = InetAddress.getLocalHost();
+            data.ipaddress = address.getHostAddress();
+        } catch (UnknownHostException e) {
+            data.ipaddress = "unknown";
+        }
         return data;
     }
 
@@ -35,8 +41,8 @@ public class RestHelper {
      * @param errorCode 错误码
      * @return 返回内容
      */
-    public static ResponseData makeResponse(Object result, ErrorCode errorCode) {
-        ResponseData data = new ResponseData();
+    public static <T> ResponseData<T> makeResponse(T result, ErrorCode errorCode) {
+        ResponseData<T> data = new ResponseData<T>();
         data.result = result;
         data.errorCode = errorCode.getCode();
         data.message = errorCode.getErrorMessage();

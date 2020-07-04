@@ -6,7 +6,7 @@
 
     <groupId>com.shengdangjia</groupId>
     <artifactId>hermes-common</artifactId>
-    <version>1.2.3</version>
+    <version>1.2.4</version>
 
     <dependencies>
         <dependency>

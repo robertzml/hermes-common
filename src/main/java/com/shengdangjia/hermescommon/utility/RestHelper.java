@@ -5,6 +5,7 @@ import com.shengdangjia.hermescommon.model.ResponseData;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.time.LocalDateTime;
 
 /**
  * 响应返回工具类
@@ -24,6 +25,7 @@ public class RestHelper<T> {
         data.result = result;
         data.errorCode = errorCode;
         data.message = message;
+        data.time = LocalDateTime.now();
 
         try {
             var address = InetAddress.getLocalHost();
@@ -31,6 +33,7 @@ public class RestHelper<T> {
         } catch (UnknownHostException e) {
             data.ipaddress = "unknown";
         }
+
         return data;
     }
 
@@ -46,6 +49,7 @@ public class RestHelper<T> {
         data.result = result;
         data.errorCode = errorCode.getCode();
         data.message = errorCode.getErrorMessage();
+        data.time = LocalDateTime.now();
 
         try {
             var address = InetAddress.getLocalHost();

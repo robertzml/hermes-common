@@ -11,6 +11,7 @@ class RestHelperTest {
     void makeResponse() {
         var result = RestHelper.makeResponse("jack", 0, "maybe");
 
+        System.out.println(result.time);
         assertEquals("jack", result.result);
     }
 }

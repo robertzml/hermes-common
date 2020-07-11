@@ -1,10 +1,5 @@
 package com.shengdangjia.hermescommon.model;
 
-
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 /**
  * 日志消息类
  */
@@ -20,8 +15,6 @@ public class LogMessage {
 
     private String message;
 
-    private long timestamp;
-
     public LogMessage() {
 
     }
@@ -31,7 +24,6 @@ public class LogMessage {
         this.setModule(module);
         this.setAction(action);
         this.setMessage(message);
-        this.setTimestamp(System.currentTimeMillis());
     }
 
     /**
@@ -79,28 +71,13 @@ public class LogMessage {
         this.message = message;
     }
 
-    /**
-     * 日志时间
-     */
-    public long getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(long timestamp) {
-        this.timestamp = timestamp;
-    }
-
     @Override
     public String toString() {
         if (this.level > 5 || this.level < 1) {
             this.level = 5;
         }
 
-        Timestamp t = new Timestamp(System.currentTimeMillis());
-        Date d = new Date(t.getTime());
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
-
-        return String.format("[%s][%s]-[%s][%s]-[%s]",
-                this.levels[this.level], format.format(d), this.module, this.action, this.message);
+        return String.format("[%s]-[%s][%s]-[%s]",
+                this.levels[this.level], this.module, this.action, this.message);
     }
 }
